@@ -36,10 +36,12 @@ Shader "Custom/206page_Vertex_ColorMasking"
             fixed4 e = tex2D (_MainTex3, IN.uv_MainTex3);
             fixed4 f = tex2D (_MainTex4, IN.uv_MainTex4);
 
-            o.Albedo = lerp(c.rgb, d.rgb, IN.color.r);
-            o.Albedo = lerp(o.Albedo, e.rgb, IN.color.g);
-            o.Albedo = lerp(o.Albedo, f.rgb, IN.color.b);
+            //o.Albedo = lerp(c.rgb, d.rgb, IN.color.r);
+            //o.Albedo = lerp(o.Albedo, e.rgb, IN.color.g);
+            //o.Albedo = lerp(o.Albedo, f.rgb, IN.color.b);
 
+            o.Albedo = d.rgb * IN.color.r + e.rgb * IN.color.g + f.rgb * IN.color.b +
+                        c.rgb * (1-(IN.color.r + IN.color.g + IN.color.b));
 
             o.Alpha = c.a;
         }
